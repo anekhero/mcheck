@@ -1,3 +1,4 @@
+#!d:\python27\python.exe
 # -*- coding: utf-8 -*-
 
 import pystache
@@ -18,7 +19,7 @@ cursor.execute("SELECT date, description, amount FROM register")
 
 
 all_data = {
-    'title':u'Список всякой всячины',
+    'title':u'Список'.encode('utf-8'),
     'items':[],
 }
 
@@ -36,6 +37,8 @@ cnx.close()
 
 renderer = pystache.Renderer()
 renderer.file_encoding = 'utf-8'
-print renderer.render_path('ghtml.mustache', all_data)
-
+renderer.string_encoding = 'utf-8'
+print "Content-Type: text/html"
+print ""
+print renderer.render_path('ghtml.mustache', all_data).encode('utf8')
 
